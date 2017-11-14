@@ -798,7 +798,7 @@ public class LoveLetter {
     }
 
     /**
-     * The Price Card causes the taget to discard his current card and redrawn a new card from the deck
+     * The Prince Card causes the taget to discard his current card and redrawn a new card from the deck
      * If the pricess is discarded the player is defeated
      * @param target player who is being targeted by the Prince card
      * @param player The player who has played the card
@@ -810,7 +810,7 @@ public class LoveLetter {
                     case 1:
                         if(Player1.getCardValue()==8){
                             System.out.println(Player1.getName()+" discarded the Princess and is Eliminated!");
-
+                            Player1.setPlaying(false);
                             Player1.setCardValue(0);
                             Player1.setCurrentCard("NULL");
                         }else{
@@ -823,6 +823,7 @@ public class LoveLetter {
                     case 2:
                         if(Player2.getCardValue()==8){
                             System.out.println(Player2.getName()+" discarded the Princess and is Eliminated!");
+                            Player2.setPlaying(false);
                             Player2.setCardValue(0);
                             Player2.setCurrentCard("NULL");
                         }else{
@@ -835,6 +836,7 @@ public class LoveLetter {
                     case 3:
                         if(Player3.getCardValue()==8){
                             System.out.println(Player3.getName()+" discarded the Princess and is Eliminated!");
+                            Player3.setPlaying(false);
                             Player3.setCardValue(0);
                             Player3.setCurrentCard("NULL");
                         }else{
@@ -854,6 +856,7 @@ public class LoveLetter {
                     case 0:
                         if(Player0.getCardValue()==8){
                             System.out.println(Player0.getName()+" discarded the Princess and is Eliminated!");
+                            Player0.setPlaying(false);
                             Player0.setCardValue(0);
                             Player0.setCurrentCard("NULL");
                         }else{
@@ -866,6 +869,7 @@ public class LoveLetter {
                     case 2:
                         if(Player2.getCardValue()==8){
                             System.out.println(Player2.getName()+" discarded the Princess and is Eliminated!");
+                            Player2.setPlaying(false);
                             Player2.setCardValue(0);
                             Player2.setCurrentCard("NULL");
                         }else{
@@ -878,6 +882,7 @@ public class LoveLetter {
                     case 3:
                         if(Player3.getCardValue()==8){
                             System.out.println(Player3.getName()+" discarded the Princess and is Eliminated!");
+                            Player3.setPlaying(false);
                             Player3.setCardValue(0);
                             Player3.setCurrentCard("NULL");
                         }else{
@@ -897,6 +902,7 @@ public class LoveLetter {
                     case 0:
                         if(Player0.getCardValue()==8){
                             System.out.println(Player0.getName()+" discarded the Princess and is Eliminated!");
+                            Player0.setPlaying(false);
                             Player0.setCardValue(0);
                             Player0.setCurrentCard("NULL");
                         }else{
@@ -909,6 +915,7 @@ public class LoveLetter {
                     case 1:
                         if(Player1.getCardValue()==8){
                             System.out.println(Player1.getName()+" discarded the Princess and is Eliminated!");
+                            Player1.setPlaying(false);
                             Player1.setCardValue(0);
                             Player1.setCurrentCard("NULL");
                         }else{
@@ -921,6 +928,7 @@ public class LoveLetter {
                     case 3:
                         if(Player3.getCardValue()==8){
                             System.out.println(Player3.getName()+" discarded the Princess and is Eliminated!");
+                            Player3.setPlaying(false);
                             Player3.setCardValue(0);
                             Player3.setCurrentCard("NULL");
                         }else{
@@ -940,6 +948,7 @@ public class LoveLetter {
                     case 0:
                         if(Player0.getCardValue()==8){
                             System.out.println(Player0.getName()+" discarded the Princess and is Eliminated!");
+                            Player0.setPlaying(false);
                             Player0.setCardValue(0);
                             Player0.setCurrentCard("NULL");
                         }else{
@@ -952,6 +961,7 @@ public class LoveLetter {
                     case 1:
                         if(Player1.getCardValue()==8){
                             System.out.println(Player1.getName()+" discarded the Princess and is Eliminated!");
+                            Player1.setPlaying(false);
                             Player1.setCardValue(0);
                             Player1.setCurrentCard("NULL");
                         }else{
@@ -964,6 +974,7 @@ public class LoveLetter {
                     case 2:
                         if(Player2.getCardValue()==8){
                             System.out.println(Player2.getName()+" discarded the Princess and is Eliminated!");
+                            Player2.setPlaying(false);
                             Player2.setCardValue(0);
                             Player2.setCurrentCard("NULL");
                         }else{
