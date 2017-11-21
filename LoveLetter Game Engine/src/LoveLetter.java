@@ -38,7 +38,8 @@ public class LoveLetter {
     private static int roundNumber;
     private static Card [] Deck = new Card [16];  // Deck size is the same each game
     private static Player [] Players = new Player [] {Player0,Player1,Player2,Player3};
-    private static Card [] DiscardPile = new Card [16];
+    private static int [] discardPile = new int [16];
+    private static int discardTick = 0;
     private static boolean isRunning = true;
     private static int currentPlayer;
     private static int targetPlayer;
@@ -122,25 +123,37 @@ public class LoveLetter {
         switch (numberOfPlayers) {
             case 1:
                 Player0.setPlaying(true);
+                Player0.setTargetable(true);
                 Player1.setPlaying(true);
+                Player1.setTargetable(true);
                 break;
             case 2:
                 Player0.setPlaying(true);
+                Player0.setTargetable(true);
                 Player1.setPlaying(true);
+                Player1.setTargetable(true);
                 Player2.setPlaying(true);
+                Player2.setTargetable(true);
                 break;
             case 3:
                 Player0.setPlaying(true);
+                Player0.setTargetable(true);
                 Player1.setPlaying(true);
+                Player1.setTargetable(true);
                 Player2.setPlaying(true);
+                Player2.setTargetable(true);
                 Player3.setPlaying(true);
                 break;
             default:
                 System.out.println("Invalid Selection, Setting number of bots to 3");
                 Player0.setPlaying(true);
+                Player0.setTargetable(true);
                 Player1.setPlaying(true);
+                Player1.setTargetable(true);
                 Player2.setPlaying(true);
+                Player2.setTargetable(true);
                 Player3.setPlaying(true);
+                Player3.setTargetable(true);
                 break;
         }
     }
@@ -204,112 +217,41 @@ public class LoveLetter {
                 ||(Player3.isPlaying()&&(Player0.isPlaying()||Player1.isPlaying()||Player2.isPlaying())))&& roundNumber <15 ){
 
             // Player who's turn it is goes
-
-        switch (currentPlayer){
-            case 0:
-                if(Player0.isPlaying()){
-                    Player0.setTargetable(true);
-                    Player0.setSecondCardValue(Deck [roundNumber].getValue());
-                    Player0.setSecondCard(Deck [roundNumber].getName());
-                    System.out.println(Player0.getName()+" drew the "+ Deck[roundNumber].getName()+" Card");
-                    System.out.println("Enter 1 to play the "+Player0.getCurrentCard()+" card or 2 to play the "+Deck[roundNumber].getName()+" card.");
-                    cardSelection = scan.nextInt();
-                    if(cardSelection == 1){
-                        playedCard(Player0.getCardValue());
-                        Player0.setCardValue(Player0.getSecondCardValue());
-                        Player0.setCurrentCard(Player0.getSecondCard());
-                    } else if (cardSelection == 2){
-                        playedCard(Player0.getSecondCardValue());
-                    }else{
-                        System.out.println("Invalid Selection, effect not applied");
-                    }
-                    currentPlayer++;
-                    roundNumber++;
-                    break;
-                }else{
-                    currentPlayer++;
-                    break;
+            if(Players[currentPlayer].isPlaying()) {
+                Players[currentPlayer].setTargetable(true);
+                Players[currentPlayer].setSecondCardValue(Deck[roundNumber].getValue());
+                Players[currentPlayer].setSecondCard(Deck[roundNumber].getName());
+                System.out.println(Players[currentPlayer].getName() + " drew the " + Deck[roundNumber].getName() + " Card");
+                System.out.println("Enter 1 to play the " + Players[currentPlayer].getCurrentCard() + " card or 2 to play the " + Deck[roundNumber].getName() + " card.");
+                cardSelection = scan.nextInt();
+                if (cardSelection == 1) {
+                    discardPileUpdate(Players[currentPlayer].getCardValue());
+                    playedCard(Players[currentPlayer].getCardValue());
+                    Players[currentPlayer].setCardValue(Players[currentPlayer].getSecondCardValue());
+                    Players[currentPlayer].setCurrentCard(Players[currentPlayer].getSecondCard());
+                } else if (cardSelection == 2) {
+                    discardPileUpdate(Players[currentPlayer].getSecondCardValue());
+                    playedCard(Players[currentPlayer].getSecondCardValue());
+                } else {
+                    System.out.println("Invalid Selection, effect not applied");
                 }
-            case 1:
-                if(Player1.isPlaying()){
-                    Player1.setTargetable(true);
-                    Player1.setSecondCardValue(Deck [roundNumber].getValue());
-                    Player1.setSecondCard(Deck [roundNumber].getName());
-                    System.out.println(Player1.getName()+" drew the "+ Deck[roundNumber].getName()+" Card");
-                    System.out.println("Enter 1 to play the "+Player1.getCurrentCard()+" card or 2 to play the "+Deck[roundNumber].getName()+" card.");
-                    cardSelection = scan.nextInt();
-                    if(cardSelection == 1){
-                        playedCard(Player1.getCardValue());
-                        Player1.setCardValue(Player1.getSecondCardValue());
-                        Player1.setCurrentCard(Player1.getSecondCard());
-                    } else if (cardSelection == 2){
-                        playedCard(Player1.getSecondCardValue());
-                    }else{
-                        System.out.println("Invalid Selection, effect not applied");
-                    }
+                if (currentPlayer == numberOfPlayers) {
+                    currentPlayer = 0;
+                } else {
                     currentPlayer++;
                     roundNumber++;
-                    break;
-                }else{
-                    currentPlayer++;
-                    break;
                 }
-            case 2:
-                if(Player2.isPlaying()){
-                    Player2.setTargetable(true);
-                    Player2.setSecondCardValue(Deck [roundNumber].getValue());
-                    Player2.setSecondCard(Deck [roundNumber].getName());
-                    System.out.println(Player2.getName()+" drew the "+ Deck[roundNumber].getName()+" Card");
-                    System.out.println("Enter 1 to play the "+Player2.getCurrentCard()+" card or 2 to play the "+Deck[roundNumber].getName()+" card.");
-                    cardSelection = scan.nextInt();
-                    if(cardSelection == 1){
-                        playedCard(Player2.getCardValue());
-                        Player2.setCardValue(Player2.getSecondCardValue());
-                        Player2.setCurrentCard(Player2.getSecondCard());
-                    } else if (cardSelection == 2){
-                        playedCard(Player2.getSecondCardValue());
-                    }else{
-                        System.out.println("Invalid Selection, effect not applied");
-                    }
-                    currentPlayer++;
-                    roundNumber++;
-                    break;
-                }else{
-                    currentPlayer++;
-                    break;
-                }
-            case 3:
-                if(Player3.isPlaying()){
-                    Player3.setTargetable(true);
-                    Player3.setSecondCardValue(Deck [roundNumber].getValue());
-                    Player3.setSecondCard(Deck [roundNumber].getName());
-                    System.out.println(Player3.getName()+" drew the "+ Deck[roundNumber].getName()+" Card");
-                    System.out.println("Enter 1 to play the "+Player3.getCurrentCard()+" card or 2 to play the "+Deck[roundNumber].getName()+" card.");
-                    cardSelection = scan.nextInt();
-                    if(cardSelection == 1){
-                        playedCard(Player3.getCardValue());
-                        Player3.setCardValue(Player3.getSecondCardValue());
-                        Player3.setCurrentCard(Player3.getSecondCard());
-                    } else if (cardSelection == 2){
-                        playedCard(Player3.getSecondCardValue());
-                    }else{
-                        System.out.println("Invalid Selection, effect not applied");
-                    }
-                    roundNumber++;
+            }
+                else if(currentPlayer == numberOfPlayers){
                     currentPlayer=0;
-                    break;
-                }else{
-                    currentPlayer=0;
-                    break;
+                    roundNumber++;
+                }else {
+                    currentPlayer++;
+                    roundNumber++;
                 }
-            default:
-                System.out.println("Invalid Selection, effect not applied");
-                break;
-
-        }
+            }
 
         // Round over game is reset for the next round
-        }
         shuffleDeck();
         if(Player0.isPlaying()){
             resetPlayers();
@@ -360,8 +302,14 @@ public class LoveLetter {
                         System.out.println(Players[targetPlayer].getName()+" is untargetable please select another player");
                     }
                 }while(Players[targetPlayer].isTargetable()==false);
-                System.out.println("What card do you think they have? (1-8)");
-                int guess = scan.nextInt();
+                int guess;
+                do {
+                    System.out.println("What card do you think they have? (2-8)");
+                    guess = scan.nextInt();
+                    if(guess==1){
+                        System.out.println("You can't guess Guard");
+                    }
+                }while(guess == 1);
                 playGuard(guess);
                 break;
             case 2:
@@ -430,6 +378,7 @@ public class LoveLetter {
         if (Players[targetPlayer].getCardValue() == guess) {
             System.out.println(Players[targetPlayer].getName() + " has been eliminated");
             Players[targetPlayer].setPlaying(false);
+            Players[targetPlayer].setTargetable(false);
         } else {
             System.out.println("Wrong guess " + Players[currentPlayer].getName());
         }
@@ -446,13 +395,19 @@ public class LoveLetter {
      * Baron compares the value of the players card and the targets and the loser is eliminated
      */
     public static void playBaron(){
+        if(Players[currentPlayer].getCardValue()==3){
+            Players[currentPlayer].setCardValue(Players[currentPlayer].getSecondCardValue());
+            Players[currentPlayer].setCurrentCard(Players[currentPlayer].getSecondCard());
+        }
         if(Players[currentPlayer].getCardValue()>Players[targetPlayer].getCardValue()){
-            Players[currentPlayer].setPlaying(false);
+            Players[targetPlayer].setPlaying(false);
+            Players[targetPlayer].setTargetable(false);
             System.out.println(Players[currentPlayer].getName()+" has defeated "+Players[targetPlayer].getName());
         }else if(Players[currentPlayer].getCardValue()==Players[targetPlayer].getCardValue()){
             System.out.println("It's a draw!");
         }else{
             Players[currentPlayer].setPlaying(false);
+            Players[currentPlayer].setTargetable(false);
             System.out.println(Players[targetPlayer].getName()+" has defeated "+Players[currentPlayer].getName());
         }
     }
@@ -474,6 +429,7 @@ public class LoveLetter {
         if (Players[targetPlayer].getCardValue() == 8) {
             System.out.println(Players[targetPlayer].getName() + " discarded the Princess and is Eliminated!");
             Players[targetPlayer].setPlaying(false);
+            Players[targetPlayer].setTargetable(false);
             Players[targetPlayer].setCardValue(0);
             Players[targetPlayer].setCurrentCard("NULL");
         } else {
@@ -491,6 +447,10 @@ public class LoveLetter {
         int tempCardNumber;
         String tempCardName;
         System.out.println(Players[currentPlayer].getName()+" has played the king against "+ Players[targetPlayer].getName());
+        if(Players[currentPlayer].getCardValue()==6){
+            Players[currentPlayer].setCardValue(Players[currentPlayer].getSecondCardValue());
+            Players[currentPlayer].setCurrentCard(Players[currentPlayer].getSecondCard());
+        }
         tempCardNumber = Players[currentPlayer].getCardValue();
         tempCardName = Players[currentPlayer].getCurrentCard();
         Players[currentPlayer].setCardValue(Players[targetPlayer].getCardValue());
@@ -513,5 +473,11 @@ public class LoveLetter {
     public static void playPrincess() {
         System.out.println(Players[currentPlayer].getName() + " Played the Princess and is defeated");
         Players[currentPlayer].setPlaying(false);
+        Players[currentPlayer].setTargetable(false);
+    }
+
+    public static void discardPileUpdate(int card){
+        discardPile[discardTick] = card;
+        discardTick++;
     }
 }
