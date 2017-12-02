@@ -11,7 +11,7 @@ Current To-Do List:
 1) Add Handmaiden functionality  ✔
 2) Fix baron card update bug (Baron tests against that player using it's own value if played from the card 1 slot)  ✔
 3) Fix King card update bug (King trades itself against that player if played from the card 1 slot)  ✔
-4) Code Refactoring (Large multi-step process, will be broken down into parts once it is approached) ✔
+4) Code Refactoring (OOP approach) ✔
 5) Add AI's to play against the player (In Progress)
 6) Port to Android Studios
 7) Buttons Update
