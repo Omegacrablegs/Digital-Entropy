@@ -6,18 +6,20 @@ public class RandomBot extends Player implements PlayerTurn {
     public RandomBot (String name){
         super();
         this.name = name;
+        playerType=1;
+        setID(1);
     }
 
-    public int getTurn(){
+    public int getTurn(Player [] Players){
         return (rand.nextInt(1)+1);
 
     }
 
-    public int getTarget(){
+    public int getTarget(int playedCard, Player [] Players){
         return (rand.nextInt(3));
     }
 
-    public int getGuess(){
+    public int getGuess(int discardProbability){
         return (rand.nextInt(6)+2);
     }
 }

@@ -2,9 +2,9 @@ package digital_entropy;
 
 public interface PlayerTurn {
 
-    int getTurn();
+    int getTurn(Player [] Players);
 
-    int getTarget();
+    int getTarget(int playedCard, Player [] Players);
 
-    int getGuess();
+    int getGuess(int discardProbability);
 }

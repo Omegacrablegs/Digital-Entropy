@@ -1,13 +1,14 @@
 package digital_entropy;
 
-public class Player implements PlayerStatus, PlayerTurn {
-    private int  winNumber, discardTracker = 0;
+public class Player implements PlayerTurn {
+    private int  winNumber, ID, currentTarget = -1, currentTargetCard = -1, numberOfPlayers;
     private Card inHand;
     private Card drawnCard;
-    public boolean isPlaying=false;
+    private Card lastCardPlayed;
+    private boolean isPlaying=false;
     private boolean isTargetable=false;
     private boolean isWinner=false;
-    private Card [] Discard = new Card [10];
+    private boolean isKnown=false;
     protected int playerType;
     protected String name;
 
@@ -16,12 +17,6 @@ public class Player implements PlayerStatus, PlayerTurn {
     public Player(){
         this.name = "NULL" ;
         this.winNumber = 0;
-    }
-
-    public Player(Card [] Discard, boolean isTargetable, boolean isPlaying ){
-        this.Discard = Discard;
-        this.isTargetable = isTargetable;
-        this.isPlaying = isPlaying;
     }
 
     public void setName(String name) {
@@ -50,10 +45,6 @@ public class Player implements PlayerStatus, PlayerTurn {
         this.drawnCard = drawnCard;
     }
 
-    public void setPlayerType(int playerType) {
-        this.playerType = playerType;
-    }
-
     public void setInHand(Card inHand){
         this.inHand = inHand;
     }
@@ -64,11 +55,6 @@ public class Player implements PlayerStatus, PlayerTurn {
 
     public Card getInHand() {
         return inHand;
-    }
-
-    public void setDiscard(Card discarded) {
-        Discard [discardTracker] = discarded;
-        discardTracker++;
     }
 
     public boolean isTargetable(){
@@ -91,25 +77,67 @@ public class Player implements PlayerStatus, PlayerTurn {
         return name;
     }
 
+    public  int getTurn(Player [] Players){
+        return -1;
+    }
+
+    public int getTarget(int playedCard, Player [] Players){
+        return -1;
+    }
+
+    public int getGuess(int discardProbability){
+        return -1;
+    }
+
+    public boolean isKnown() {
+        return isKnown;
+    }
+
+    public void setKnown(boolean known) {
+        isKnown = known;
+    }
+
+    public void setCurrentTarget(int currentTarget) {
+        this.currentTarget = currentTarget;
+    }
+
+    public int getCurrentTarget() {
+        return currentTarget;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public Card getLastCardPlayed() {
+        return lastCardPlayed;
+    }
+
+    public void setLastCardPlayed(Card lastCardPlayed) {
+        this.lastCardPlayed = lastCardPlayed;
+    }
+
+    public void setCurrentTargetCard(int currentTargetCard) {
+        this.currentTargetCard = currentTargetCard;
+    }
+
+    public int getCurrentTargetCard() {
+        return currentTargetCard;
+    }
+
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
+    }
+
+    public void setNumberOfPlayers(int numberOfPlayers) {
+        this.numberOfPlayers = numberOfPlayers;
+    }
 
     public int getWinNumber() {
         return winNumber;
-    }
-
-    public Player getPlayerStatus(){
-        Player Status = new Player(this.Discard, this.isTargetable, this.isPlaying);
-        return Status;
-    }
-
-    public  int getTurn(){
-        return -1;
-    }
-
-    public int getTarget(){
-        return -1;
-    }
-
-    public int getGuess(){
-        return -1;
     }
 }
